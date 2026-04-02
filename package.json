@@ -2,7 +2,9 @@
   "name": "tron-deployment",
   "private": true,
   "workspaces": [
-    "packages/tron-lib"
+    "packages/tron-lib",
+    "catapultar/typescript",
+    "catalyst-intent"
   ],
   "scripts": {
     "postinstall": "node packages/tron-lib/postinstall-tronweb-fix.mjs"

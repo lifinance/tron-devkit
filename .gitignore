@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+.yalc/
+yalc.lock
+
+# Foundry build outputs
+out/
+cache/
+broadcast/
+zkout/
+artifacts-zk/
+foundry-zksync/*.tar.gz
+
+# TypeScript build outputs
+dist/
+*.tsbuildinfo
+typechain/
+typechain-types/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Coverage
+coverage/
+coverage.json
+lcov.info
+lcov-filtered.info
+.gas-snapshot
+
+# Logs
+*.log
+test/logs/
+
+# OS / Editor
+.DS_Store
+.DS_Store*
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# AI / Automation tools
+.aider*
+.cursorrules
+.copilot*
+.direnv/
+.claude/settings.local.json
+
+# Misc generated files
+diamond.json
+contractsInfo.json
+.invalid-dexs
+.eslintcache
+.cache/

@@ -1,0 +1,10 @@
+{
+  "name": "tron-deployment",
+  "private": true,
+  "workspaces": [
+    "packages/tron-lib"
+  ],
+  "scripts": {
+    "postinstall": "node packages/tron-lib/postinstall-tronweb-fix.mjs"
+  }
+}

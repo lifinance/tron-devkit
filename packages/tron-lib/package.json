@@ -1,0 +1,32 @@
+{
+  "name": "@lifinance/tron-lib",
+  "version": "0.1.0",
+  "description": "Shared Tron library for LI.FI contract repos — deployment, troncast CLI, address helpers",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "bin": {
+    "troncast": "src/troncast/index.ts"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./safe": "./src/safe/index.ts",
+    "./troncast": "./src/troncast/index.ts"
+  },
+  "scripts": {
+    "postinstall": "node postinstall-tronweb-fix.mjs"
+  },
+  "dependencies": {
+    "citty": "^0.1.6",
+    "consola": "^3.2.3",
+    "tronweb": "^6.0.3",
+    "viem": "^2.22.16"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.18",
+    "typescript": "^5.7.0"
+  },
+  "peerDependencies": {
+    "bun": ">=1.0.0"
+  }
+}

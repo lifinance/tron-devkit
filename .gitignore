@@ -54,3 +54,6 @@ contractsInfo.json
 .invalid-dexs
 .eslintcache
 .cache/
+
+# AI plans
+plans/

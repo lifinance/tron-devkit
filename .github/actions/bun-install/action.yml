@@ -1,7 +1,6 @@
 # Bun install (composite action)
 # - Installs Bun and Node.js (LTS), then runs a frozen lockfile install
 # - Use from workflows that need the repo toolchain before build or test steps
-# - Known limitations: relies on callers to set working-directory if needed
 
 name: 'Bun install'
 description: 'Run bun install with cache enabled'

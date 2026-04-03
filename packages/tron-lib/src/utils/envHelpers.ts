@@ -27,10 +27,15 @@ const DEFAULT_RPC_URLS: Record<string, string> = {
 }
 
 /**
- * Get the RPC URL for a Tron network from env vars, with fallback to TronGrid defaults.
- * Checks `RPC_URL_TRON` / `RPC_URL_TRONSHASTA` first, then falls back.
+ * Get the RPC URL for a Tron network.
+ * Priority: override (CLI flag) > env var > TronGrid default.
+ * @param networkName - Network name (e.g. 'tron', 'tronshasta')
+ * @param override - Optional RPC URL passed via CLI flag (e.g. --rpc-url)
  */
-export function getTronRpcUrl(networkName: string): string {
+export function getTronRpcUrl(networkName: string, override?: string): string {
+  const trimmed = override?.trim()
+  if (trimmed) return trimmed
+
   const key = networkName.toLowerCase()
   const envVarName = getRPCEnvVarName(key)
   const envValue = process.env[envVarName]?.trim()
@@ -40,7 +45,7 @@ export function getTronRpcUrl(networkName: string): string {
   if (fallback) return fallback
 
   throw new Error(
-    `No RPC URL for network "${networkName}". Set ${envVarName} or use a known network (tron, tronshasta).`
+    `No RPC URL for network "${networkName}". Pass --rpc-url <url>, set ${envVarName}, or use a known network (tron, tronshasta).`
   )
 }
 

@@ -44,7 +44,7 @@ export function createTronWeb(options: ICreateTronWebOptions): TronWeb {
   if (!apiKey) {
     apiKey = options.tronProApiKey?.trim()
     if (!apiKey && isTronGridRpcUrl(fullHost))
-      apiKey = getTronGridAPIKey(options.verbose ?? false)?.trim()
+      apiKey = getTronGridAPIKey(undefined, options.verbose ?? false)?.trim()
     if (apiKey) merged[TRON_PRO_API_KEY_HEADER] = apiKey
   }
 

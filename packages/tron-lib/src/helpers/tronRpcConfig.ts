@@ -6,9 +6,19 @@ import { getEnvVar, getTronRpcUrl } from '../utils/envHelpers'
 import { isTronGridRpcUrl } from './isTronGridRpcUrl'
 
 /**
- * Get TronGrid API key from environment variables.
+ * Get TronGrid API key.
+ * Priority: override (CLI flag) > env var.
+ * @param override - Optional API key passed via CLI flag (e.g. --trongrid-api-key)
+ * @param verbose - Log debug info
  */
-export function getTronGridAPIKey(verbose = false): string | undefined {
+export function getTronGridAPIKey(override?: string, verbose = false): string | undefined {
+  const trimmed = override?.trim()
+  if (trimmed) {
+    if (verbose)
+      consola.debug('Using TronGrid API key from CLI override')
+    return trimmed
+  }
+
   const envVarName = 'TRONGRID_API_KEY'
 
   try {
@@ -50,7 +60,7 @@ export function buildTronWalletJsonPostHeaders(
     'content-type': 'application/json',
   }
   if (isTronGridRpcUrl(fullHost)) {
-    const apiKey = getTronGridAPIKey(verbose)
+    const apiKey = getTronGridAPIKey(undefined, verbose)
     if (apiKey) headers[TRON_PRO_API_KEY_HEADER] = apiKey
     else if (verbose) {
       consola.warn(
@@ -78,7 +88,7 @@ export function getTronRPCConfig(
   let headers: Record<string, string> | undefined
 
   if (isTronGrid) {
-    const apiKey = getTronGridAPIKey(verbose)
+    const apiKey = getTronGridAPIKey(undefined, verbose)
     if (apiKey) {
       headers = { [TRON_PRO_API_KEY_HEADER]: apiKey }
       if (verbose)

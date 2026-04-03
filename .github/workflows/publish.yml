@@ -2,7 +2,6 @@
 # - Creates GitHub releases from semver tags (v*.*.*, alpha, beta)
 # - Builds and publishes the tron-devkit package to npm with provenance
 # - Triggers: push of matching version tags, or manual workflow_dispatch
-# - Known limitations: npm dist-tag (alpha/beta) is inferred from ref_name substrings
 
 name: Release & Publish
 

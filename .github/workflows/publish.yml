@@ -1,3 +1,9 @@
+# Release & Publish
+# - Creates GitHub releases from semver tags (v*.*.*, alpha, beta)
+# - Builds and publishes the tron-devkit package to npm with provenance
+# - Triggers: push of matching version tags, or manual workflow_dispatch
+# - Known limitations: npm dist-tag (alpha/beta) is inferred from ref_name substrings
+
 name: Release & Publish
 
 on:
@@ -8,16 +14,20 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
   workflow_dispatch:
 
+concurrency:
+  group: release-publish-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   release:
     permissions:
-      contents: write
+      contents: write # required to create GitHub releases
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4.2.1
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@b25b93d384199fc0fc8c2e126b2d937a0cbeb2ae # v2.5.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -28,14 +38,15 @@ jobs:
 
   publish:
     permissions:
-      contents: write
-      id-token: write
+      contents: write # required to checkout and publish packages
+      id-token: write # required for npm provenance (OIDC)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4.2.1
       - name: Install dependencies
         uses: ./.github/actions/bun-install
-      - name: Build
+      - name: Build tron-devkit package
         run: bun run build --filter @lifi/tron-devkit
       - name: Publish to npm
         working-directory: packages/tron-lib

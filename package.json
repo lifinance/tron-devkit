@@ -5,6 +5,13 @@
     "packages/tron-lib"
   ],
   "scripts": {
-    "postinstall": "node packages/tron-lib/postinstall-tronweb-fix.mjs"
+    "postinstall": "node packages/tron-lib/postinstall-tronweb-fix.mjs",
+    "build": "bun run --filter @lifi/tron-devkit build",
+    "release": "bumpp packages/tron-lib/package.json --tag 'v%s' --commit 'chore: release v%s' --no-push",
+    "release:beta": "bumpp packages/tron-lib/package.json --preid beta --tag 'v%s' --commit 'chore: release v%s' --no-push",
+    "release:alpha": "bumpp packages/tron-lib/package.json --preid alpha --tag 'v%s' --commit 'chore: release v%s' --no-push"
+  },
+  "devDependencies": {
+    "bumpp": "^9.11.1"
   }
 }

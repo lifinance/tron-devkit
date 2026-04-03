@@ -1,3 +1,4 @@
+import { readFile } from 'fs/promises'
 import { resolve } from 'path'
 
 import { consola } from 'consola'
@@ -19,7 +20,7 @@ export async function loadForgeArtifact(
   )
 
   try {
-    const artifact = await Bun.file(artifactPath).json()
+    const artifact = JSON.parse(await readFile(artifactPath, 'utf-8'))
 
     if (!artifact.abi || !artifact.bytecode?.object)
       throw new Error(

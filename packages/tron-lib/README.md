@@ -1,11 +1,11 @@
-# @lifinance/tron-lib
+# @lifi/tron-devkit
 
-Shared Tron library for deploying and interacting with smart contracts on the Tron blockchain. Provides deployment tooling, address helpers, energy estimation, and a `troncast` CLI (Cast-like tool for Tron).
+Shared Tron development library for deploying and interacting with smart contracts on the Tron blockchain. Provides deployment tooling, address helpers, and energy estimation.
 
 ## Installation
 
 ```bash
-bun add @lifinance/tron-lib
+npm install @lifi/tron-devkit
 ```
 
 ## Quick Start
@@ -16,7 +16,7 @@ import {
   loadForgeArtifact,
   getPrivateKey,
   getTronRpcUrl,
-} from '@lifinance/tron-lib'
+} from '@lifi/tron-devkit'
 
 // 1. Compile your contracts with Forge
 // cd your-repo && forge build
@@ -71,7 +71,7 @@ const deployer = new TronContractDeployer({
 Load compiled contract artifacts from Forge output:
 
 ```typescript
-import { loadForgeArtifact } from '@lifinance/tron-lib'
+import { loadForgeArtifact } from '@lifi/tron-devkit'
 
 // Default: loads from <cwd>/out/<Name>.sol/<Name>.json
 const artifact = await loadForgeArtifact('MyContract')
@@ -89,7 +89,7 @@ import {
   tronAddressToHex,
   evmHexToTronBase58,
   tronAddressLikeToBase58,
-} from '@lifinance/tron-lib'
+} from '@lifi/tron-devkit'
 
 // Tron base58 -> EVM hex
 const hex = tronAddressToHex(tronWeb, 'TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW')
@@ -107,7 +107,7 @@ import {
   estimateContractCallEnergy,
   estimateEnergyAndFeeLimit,
   getCurrentPrices,
-} from '@lifinance/tron-lib'
+} from '@lifi/tron-devkit'
 
 // Get current energy/bandwidth prices
 const { energyPrice, bandwidthPrice } = await getCurrentPrices(tronWeb)
@@ -127,7 +127,7 @@ const energy = await estimateContractCallEnergy({
 For multisig governance workflows:
 
 ```typescript
-import { broadcastTronContractCall } from '@lifinance/tron-lib/safe'
+import { broadcastTronContractCall } from '@lifi/tron-devkit/safe'
 
 const result = await broadcastTronContractCall({
   networkKey: 'tron',
@@ -137,37 +137,11 @@ const result = await broadcastTronContractCall({
 })
 ```
 
-## troncast CLI
-
-Cast-like CLI for Tron blockchain interactions. Available as `troncast` binary or via `bun run`:
-
-```bash
-# Read-only contract call
-bun troncast call <address> "balanceOf(address) returns (uint256)" <param> --env mainnet
-
-# Send transaction
-bun troncast send <address> "transfer(address,uint256)" <to>,<amount> --env mainnet
-
-# Get contract bytecode
-bun troncast code <address> --env mainnet
-
-# Address conversion
-bun troncast address to-hex <tron-base58-address>
-bun troncast address to-base58 <evm-hex-address>
-```
-
-### troncast Environment
-
-- `--env mainnet` uses `RPC_URL_TRON` (fallback: `https://api.trongrid.io`)
-- `--env testnet` uses `RPC_URL_TRONSHASTA` (fallback: `https://api.shasta.trongrid.io`)
-- `--rpcUrl <url>` overrides the environment variable
-- `send` command uses `PRIVATE_KEY` env var (or `--privateKey` flag)
-
 ## Integrating a New Repo
 
 1. **Install the library:**
    ```bash
-   bun add @lifinance/tron-lib
+   npm install @lifi/tron-devkit
    ```
 
 2. **Compile contracts:**
@@ -189,7 +163,7 @@ bun troncast address to-base58 <evm-hex-address>
      loadForgeArtifact,
      getPrivateKey,
      getTronRpcUrl,
-   } from '@lifinance/tron-lib'
+   } from '@lifi/tron-devkit'
 
    const deployer = new TronContractDeployer({
      fullHost: getTronRpcUrl('tron'),
@@ -211,7 +185,7 @@ bun troncast address to-base58 <evm-hex-address>
 
 ## API Reference
 
-### Exports from `@lifinance/tron-lib`
+### Exports from `@lifi/tron-devkit`
 
 | Export | Description |
 |--------|-------------|
@@ -231,14 +205,14 @@ bun troncast address to-base58 <evm-hex-address>
 | `isTronNetworkKey` | Check if network key is Tron |
 | `TronWalletClient` | Wallet wrapper for Safe operations |
 
-### Exports from `@lifinance/tron-lib/safe`
+### Exports from `@lifi/tron-devkit/safe`
 
 | Export | Description |
 |--------|-------------|
 | `broadcastTronContractCall` | Broadcast arbitrary contract call |
 | `broadcastTronSafeExecTransaction` | Broadcast Safe execTransaction |
 
-## Tron vs EVM — Key Differences
+## Tron vs EVM -- Key Differences
 
 | Aspect | EVM | Tron |
 |--------|-----|------|

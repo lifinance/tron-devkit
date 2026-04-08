@@ -1,6 +1,6 @@
 {
   "name": "@lifi/tron-devkit",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1",
   "description": "Shared Tron development library for LI.FI contract repos — deployment, address helpers, energy estimation",
   "type": "module",
   "main": "dist/index.js",

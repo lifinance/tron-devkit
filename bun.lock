@@ -4,12 +4,13 @@
     "": {
       "name": "tron-deployment",
       "devDependencies": {
+        "@lifi/tron-devkit": "^1.0.0",
         "bumpp": "^9.11.1",
       },
     },
     "packages/tron-lib": {
       "name": "@lifi/tron-devkit",
-      "version": "0.1.0",
+      "version": "1.0.0",
       "dependencies": {
         "consola": "^3.2.3",
         "tronweb": "^6.0.3",

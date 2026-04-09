@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "tsc",
+    "prepublishOnly": "bunx --bun tsc",
     "postinstall": "node postinstall-tronweb-fix.mjs"
   },
   "dependencies": {

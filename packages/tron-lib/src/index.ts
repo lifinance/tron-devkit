@@ -60,6 +60,9 @@ export {
   estimateEnergyAndFeeLimit,
 } from './helpers/estimateContractEnergy'
 
+// Deployment prompts
+export { promptEnergyRentalReminder } from './helpers/promptEnergyRentalReminder'
+
 // Forge artifact loading
 export { loadForgeArtifact } from './helpers/loadForgeArtifact'
 

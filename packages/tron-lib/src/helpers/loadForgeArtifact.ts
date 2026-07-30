@@ -1,5 +1,5 @@
 import { readFile } from 'fs/promises'
-import { resolve } from 'path'
+import { resolve, relative } from 'path'
 
 import { consola } from 'consola'
 
@@ -14,10 +14,15 @@ export async function loadForgeArtifact(
   contractName: string,
   artifactsDir: string = resolve(process.cwd(), 'out')
 ): Promise<IForgeArtifact> {
+  const baseDir = resolve(artifactsDir)
   const artifactPath = resolve(
-    artifactsDir,
+    baseDir,
     `${contractName}.sol/${contractName}.json`
   )
+  const rel = relative(baseDir, artifactPath)
+  if (rel.startsWith('..') || resolve(rel) === rel) {
+    throw new Error(`Invalid contract name: ${contractName}`)
+  }
 
   try {
     const artifact = JSON.parse(await readFile(artifactPath, 'utf-8'))

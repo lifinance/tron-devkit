@@ -14,5 +14,11 @@
   "devDependencies": {
     "@lifi/tron-devkit": "workspace:*",
     "bumpp": "^9.11.1"
+  },
+  "dependencies": {
+    "tar": "https://npm.aikido.io/a9f6e864300b1894118f/tar@6.2.1-aikido.11"
+  },
+  "overrides": {
+    "tar": "https://npm.aikido.io/a9f6e864300b1894118f/tar@6.2.1-aikido.11"
   }
 }

@@ -13,6 +13,6 @@
   },
   "devDependencies": {
     "@lifi/tron-devkit": "workspace:*",
-    "bumpp": "^9.11.1"
+    "bumpp": "^12.3.0"
   }
 }

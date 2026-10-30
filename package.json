@@ -9,10 +9,16 @@
     "build": "bun run --filter @lifi/tron-devkit build",
     "release": "bumpp packages/tron-lib/package.json --tag 'v%s' --commit 'chore: release v%s' --no-push",
     "release:beta": "bumpp packages/tron-lib/package.json --preid beta --tag 'v%s' --commit 'chore: release v%s' --no-push",
-    "release:alpha": "bumpp packages/tron-lib/package.json --preid alpha --tag 'v%s' --commit 'chore: release v%s' --no-push"
+    "release:alpha": "bumpp packages/tron-lib/package.json --preid alpha --tag 'v%s' --commit 'chore: release v%s' --no-push",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check"
   },
   "devDependencies": {
     "@lifi/tron-devkit": "workspace:*",
-    "bumpp": "^12.3.0"
+    "bumpp": "^12.3.0",
+    "oxfmt": "0.75.0",
+    "oxlint": "1.90.0"
   }
 }

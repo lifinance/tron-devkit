@@ -245,7 +245,7 @@ export class TronContractDeployer {
         )
 
       return calculateTransactionBandwidth(deployTx)
-    } catch (error) {
+    } catch {
       const bytecodeSize = artifact.bytecode.object.length / 2
       const estimatedTxSize = bytecodeSize + 200
       return Math.ceil(estimatedTxSize * 1.2)

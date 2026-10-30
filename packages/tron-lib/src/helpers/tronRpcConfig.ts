@@ -11,11 +11,13 @@ import { isTronGridRpcUrl } from './isTronGridRpcUrl'
  * @param override - Optional API key passed via CLI flag (e.g. --trongrid-api-key)
  * @param verbose - Log debug info
  */
-export function getTronGridAPIKey(override?: string, verbose = false): string | undefined {
+export function getTronGridAPIKey(
+  override?: string,
+  verbose = false
+): string | undefined {
   const trimmed = override?.trim()
   if (trimmed) {
-    if (verbose)
-      consola.debug('Using TronGrid API key from CLI override')
+    if (verbose) consola.debug('Using TronGrid API key from CLI override')
     return trimmed
   }
 
@@ -81,8 +83,7 @@ export function getTronRPCConfig(
   verbose = false
 ): { rpcUrl: string; headers?: Record<string, string> } {
   const rpcUrl = getTronRpcUrl(networkName)
-  if (verbose)
-    consola.debug(`Using RPC URL for ${networkName}: ${rpcUrl}`)
+  if (verbose) consola.debug(`Using RPC URL for ${networkName}: ${rpcUrl}`)
 
   const isTronGrid = isTronGridRpcUrl(rpcUrl)
   let headers: Record<string, string> | undefined

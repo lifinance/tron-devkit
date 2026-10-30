@@ -23,9 +23,9 @@ import {
 
 // 2. Load artifact and deploy
 const deployer = new TronContractDeployer({
-  fullHost: getTronRpcUrl('tron'),       // RPC_URL_TRON or TronGrid fallback
+  fullHost: getTronRpcUrl('tron'), // RPC_URL_TRON or TronGrid fallback
   tvmNetworkKey: 'tron',
-  privateKey: getPrivateKey(),            // from PRIVATE_KEY env var
+  privateKey: getPrivateKey(), // from PRIVATE_KEY env var
 })
 
 const artifact = await loadForgeArtifact('MyContract', './out')
@@ -37,18 +37,19 @@ console.log(`Cost: ${result.actualCost.trxCost} TRX`)
 
 ## Environment Variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `PRIVATE_KEY` | Yes | Deployer private key (hex, with or without `0x`) |
-| `RPC_URL_TRON` | No | Tron mainnet RPC URL (default: `https://api.trongrid.io`) |
-| `RPC_URL_TRONSHASTA` | No | Tron Shasta testnet RPC URL (default: `https://api.shasta.trongrid.io`) |
-| `TRONGRID_API_KEY` | No | TronGrid API key (reduces rate limiting) |
+| Variable             | Required | Description                                                             |
+| -------------------- | -------- | ----------------------------------------------------------------------- |
+| `PRIVATE_KEY`        | Yes      | Deployer private key (hex, with or without `0x`)                        |
+| `RPC_URL_TRON`       | No       | Tron mainnet RPC URL (default: `https://api.trongrid.io`)               |
+| `RPC_URL_TRONSHASTA` | No       | Tron Shasta testnet RPC URL (default: `https://api.shasta.trongrid.io`) |
+| `TRONGRID_API_KEY`   | No       | TronGrid API key (reduces rate limiting)                                |
 
 ## Core Features
 
 ### Contract Deployment (`TronContractDeployer`)
 
 Full deployment lifecycle:
+
 - Energy + bandwidth estimation via `triggerconstantcontract`
 - Cost validation against account balance (accounting for delegated resources)
 - Rate-limit retry logic (TronGrid 429 backoff)
@@ -60,9 +61,9 @@ const deployer = new TronContractDeployer({
   fullHost: 'https://api.trongrid.io',
   tvmNetworkKey: 'tron',
   privateKey: '0x...',
-  dryRun: false,        // set true for cost preview
-  verbose: false,       // set true for debug logging
-  safetyMargin: 1.2,   // 20% energy buffer (default)
+  dryRun: false, // set true for cost preview
+  verbose: false, // set true for debug logging
+  safetyMargin: 1.2, // 20% energy buffer (default)
 })
 ```
 
@@ -140,16 +141,19 @@ const result = await broadcastTronContractCall({
 ## Integrating a New Repo
 
 1. **Install the library:**
+
    ```bash
    npm install @lifi/tron-devkit
    ```
 
 2. **Compile contracts:**
+
    ```bash
    forge build
    ```
 
 3. **Set environment variables:**
+
    ```bash
    export PRIVATE_KEY=0x...
    export RPC_URL_TRON=https://api.trongrid.io  # optional
@@ -157,6 +161,7 @@ const result = await broadcastTronContractCall({
    ```
 
 4. **Write a deployment script:**
+
    ```typescript
    import {
      TronContractDeployer,
@@ -187,38 +192,38 @@ const result = await broadcastTronContractCall({
 
 ### Exports from `@lifi/tron-devkit`
 
-| Export | Description |
-|--------|-------------|
-| `TronContractDeployer` | Main deployment class |
-| `loadForgeArtifact` | Load Forge build artifacts |
-| `getPrivateKey` | Read `PRIVATE_KEY` from env |
-| `getTronRpcUrl` | Read RPC URL with TronGrid fallback |
-| `tronAddressToHex` | Tron base58 -> EVM hex |
-| `evmHexToTronBase58` | EVM hex -> Tron base58 |
-| `createTronWeb` | Create TronWeb instance |
-| `createTronWebForTvmNetworkKey` | Create TronWeb from network key |
-| `createTronWebReadOnly` | Read-only TronWeb (no signing) |
-| `estimateContractCallEnergy` | Estimate energy for contract call |
-| `getCurrentPrices` | Get energy/bandwidth prices |
-| `tronScanTransactionUrl` | Build TronScan TX URL |
-| `formatAddressForNetworkCliDisplay` | Format address for CLI output |
-| `isTronNetworkKey` | Check if network key is Tron |
-| `TronWalletClient` | Wallet wrapper for Safe operations |
+| Export                              | Description                         |
+| ----------------------------------- | ----------------------------------- |
+| `TronContractDeployer`              | Main deployment class               |
+| `loadForgeArtifact`                 | Load Forge build artifacts          |
+| `getPrivateKey`                     | Read `PRIVATE_KEY` from env         |
+| `getTronRpcUrl`                     | Read RPC URL with TronGrid fallback |
+| `tronAddressToHex`                  | Tron base58 -> EVM hex              |
+| `evmHexToTronBase58`                | EVM hex -> Tron base58              |
+| `createTronWeb`                     | Create TronWeb instance             |
+| `createTronWebForTvmNetworkKey`     | Create TronWeb from network key     |
+| `createTronWebReadOnly`             | Read-only TronWeb (no signing)      |
+| `estimateContractCallEnergy`        | Estimate energy for contract call   |
+| `getCurrentPrices`                  | Get energy/bandwidth prices         |
+| `tronScanTransactionUrl`            | Build TronScan TX URL               |
+| `formatAddressForNetworkCliDisplay` | Format address for CLI output       |
+| `isTronNetworkKey`                  | Check if network key is Tron        |
+| `TronWalletClient`                  | Wallet wrapper for Safe operations  |
 
 ### Exports from `@lifi/tron-devkit/safe`
 
-| Export | Description |
-|--------|-------------|
-| `broadcastTronContractCall` | Broadcast arbitrary contract call |
-| `broadcastTronSafeExecTransaction` | Broadcast Safe execTransaction |
+| Export                             | Description                       |
+| ---------------------------------- | --------------------------------- |
+| `broadcastTronContractCall`        | Broadcast arbitrary contract call |
+| `broadcastTronSafeExecTransaction` | Broadcast Safe execTransaction    |
 
 ## Tron vs EVM -- Key Differences
 
-| Aspect | EVM | Tron |
-|--------|-----|------|
-| Address format | `0x` + 40 hex | Base58 (T prefix, 34 chars) |
-| Gas model | Gas per opcode | Energy + Bandwidth |
-| RPC | Standard JSON-RPC | TronWeb HTTP API |
-| Fee unit | Wei (ETH) | SUN (1 TRX = 1,000,000 SUN) |
-| CREATE2 | Deterministic | Different addresses than EVM |
-| Rate limits | Varies | TronGrid has aggressive 429s |
+| Aspect         | EVM               | Tron                         |
+| -------------- | ----------------- | ---------------------------- |
+| Address format | `0x` + 40 hex     | Base58 (T prefix, 34 chars)  |
+| Gas model      | Gas per opcode    | Energy + Bandwidth           |
+| RPC            | Standard JSON-RPC | TronWeb HTTP API             |
+| Fee unit       | Wei (ETH)         | SUN (1 TRX = 1,000,000 SUN)  |
+| CREATE2        | Deterministic     | Different addresses than EVM |
+| Rate limits    | Varies            | TronGrid has aggressive 429s |

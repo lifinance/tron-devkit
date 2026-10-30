@@ -409,9 +409,8 @@ export class TronContractDeployer {
         )
 
       const signedTx = await this.tronWeb.trx.sign(deployTx)
-      const broadcastResult = await this.tronWeb.trx.sendRawTransaction(
-        signedTx
-      )
+      const broadcastResult =
+        await this.tronWeb.trx.sendRawTransaction(signedTx)
 
       if (!broadcastResult.result)
         throw new Error(

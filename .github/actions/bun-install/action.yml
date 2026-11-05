@@ -1,5 +1,5 @@
 # Bun install (composite action)
-# - Installs Bun and Node.js (LTS), then runs a frozen lockfile install
+# - Installs Bun and Node.js 26 (LTS), then runs a frozen lockfile install
 # - Use from workflows that need the repo toolchain before build or test steps
 
 name: 'Bun install'
@@ -13,7 +13,7 @@ runs:
     - name: Set up Node.js
       uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
       with:
-        node-version: lts/*
+        node-version: 26
         registry-url: 'https://registry.npmjs.org'
     - name: Install dependencies
       shell: bash

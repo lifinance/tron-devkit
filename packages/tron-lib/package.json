@@ -2,6 +2,11 @@
   "name": "@lifi/tron-devkit",
   "version": "1.0.1",
   "description": "Shared Tron development library for LI.FI contract repos — deployment, address helpers, energy estimation",
+  "files": [
+    "dist",
+    "postinstall-tronweb-fix.mjs",
+    "README.md"
+  ],
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,11 +20,6 @@
       "import": "./dist/safe/index.js"
     }
   },
-  "files": [
-    "dist",
-    "postinstall-tronweb-fix.mjs",
-    "README.md"
-  ],
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "bunx --bun tsc",
@@ -31,7 +31,7 @@
     "viem": "^2.22.16"
   },
   "devDependencies": {
-    "@types/node": "^25.5.2",
-    "typescript": "^5.7.0"
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2"
   }
 }

@@ -7,7 +7,5 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "references": [
-    { "path": "packages/tron-deploy-lib" }
-  ]
+  "references": [{ "path": "packages/tron-deploy-lib" }]
 }

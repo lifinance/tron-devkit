@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "consola": "^3.2.3",
-    "tronweb": "^6.0.3",
-    "viem": "^2.22.16"
+    "tronweb": "^6.5.1",
+    "viem": "^2.57.16"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",

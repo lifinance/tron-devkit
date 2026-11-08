@@ -1,0 +1,23 @@
+version: 2
+updates:
+  - package-ecosystem: 'bun'
+    directories:
+      - '/'
+      - '/packages/tron-lib'
+    schedule:
+      interval: 'monthly'
+    open-pull-requests-limit: 5
+    groups:
+      bun-minor-patch:
+        update-types: ['minor', 'patch']
+
+  - package-ecosystem: 'github-actions'
+    directories:
+      - '/'
+      - '/.github/actions/bun-install'
+    schedule:
+      interval: 'monthly'
+    open-pull-requests-limit: 5
+    groups:
+      github-actions-minor-patch:
+        update-types: ['minor', 'patch']
